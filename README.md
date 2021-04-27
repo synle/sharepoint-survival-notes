@@ -426,3 +426,19 @@ Exit();
 https://australia.flow.microsoft.com/manage/approvals/received
 https://flow.microsoft.com/manage/approvals/received
 https://joannecklein.com/2018/11/30/using-microsoft-flow-to-know-when-a-modern-page-is-published/
+
+
+
+## Other tips and tricks
+### Script to get the name and column from site content types and other things
+Run this in the console
+```
+data = [...document.querySelectorAll('#columnstable a')].map(s => {
+  try{
+    return `|${s.innerText}|${decodeURIComponent(s.href).match(/Field=[a-zA-Z0-9_]+/)[0].replace('Field=', '')}|`
+  }  catch(err){
+    return '';
+  }
+})
+copy(`|Display|Column Name|\n|--------|--------|\n` + data.filter(s => !!s).join('\n'))
+```
