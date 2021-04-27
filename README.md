@@ -51,6 +51,8 @@ echo 'Done formatting'
 
 ### Build & Package & Deploy
 
+More info on this here: https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/hosting-webpart-from-office-365-cdn
+
 ```
 echo '''
 ========================================================
@@ -65,14 +67,14 @@ echo '''
 = gulp bundle
 ========================================================
 '''
-./node_modules/.bin/gulp bundle
+./node_modules/.bin/gulp bundle --ship
 
 echo '''
 ========================================================
 = gulp package-solution
 ========================================================
 '''
-./node_modules/.bin/gulp package-solution
+./node_modules/.bin/gulp package-solution --ship
 
 echo '''
 ========================================================
@@ -80,6 +82,7 @@ echo '''
 ========================================================
 '''
 echo sharepoint/solution/*.sppkg
+
 
 ```
 
