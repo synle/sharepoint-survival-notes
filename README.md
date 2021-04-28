@@ -42,10 +42,9 @@ For import alias shorten path, edit `tsconfig.json`
 ### Formating script
 
 ```
-npx prettier --write ./src/**/**/**/**/**/*.ts && \
-npx prettier --write ./src/**/**/**/**/**/*.tsx && \
-npx prettier --write ./src/**/**/**/**/**/*.scss && \
-npx prettier --write --parser json **/**/**/*.json .prettierrc && \
+npx prettier --write src/**/*.{ts,tsx,scss} && \
+npx prettier --write *.md && \
+npx prettier --write --parser json *.json .prettierrc && \
 echo 'Done formatting'
 ```
 
