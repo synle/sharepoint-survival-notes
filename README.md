@@ -441,3 +441,7 @@ data = [...document.querySelectorAll('#columnstable a')].map(s => {
 })
 copy(`|Display|Column Name|\n|--------|--------|\n` + data.filter(s => !!s).join('\n'))
 ```
+
+
+### Definitions for the naming of sharepoint crawled properties
+https://sharepoint.stackexchange.com/questions/227344/where-is-the-definitive-list-of-crawled-properties-in-sharepoint-2016
