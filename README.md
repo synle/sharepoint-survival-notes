@@ -445,3 +445,27 @@ copy(`|Display|Column Name|\n|--------|--------|\n` + data.filter(s => !!s).join
 
 ### Definitions for the naming of sharepoint crawled properties
 https://sharepoint.stackexchange.com/questions/227344/where-is-the-definitive-list-of-crawled-properties-in-sharepoint-2016
+
+### Sharepoint managed properties name:
+
+https://sharepointgypsy.wordpress.com/2019/04/22/sharepoint-2016-finding-crawled-properties-and-manage-properties-by-name/
+
+- `DATE` : Date and Time
+- `TEXT` : Single Line of Text
+- `MTXT` : Multiple Lines of Text
+- `CHCS` : Choice
+- `CHCM` : Choice that Allows Multiple Choice
+- `NMBR` : Number
+- `CURR` : Currency
+- `BOOL` : Yes/No
+- `USER` : Person or Group
+- `URLH` : Hyperlink or Picture
+- `HTML` : Publishing HTML
+- `IMGE` : Publishing Image
+- `LINK` : Publishing Link
+- `INTG` : Integer
+- `GUID` : GUID
+- `CHCG` : Grid Choice
+- `CTID` : Content Type ID Field
+- `RAVG` : SPS Average Rating
+- `RCNT` : SPS Rating Count
