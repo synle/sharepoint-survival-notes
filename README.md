@@ -280,6 +280,7 @@ PNP Refiner youtube training video : https://youtu.be/y760Okrz-Oo
 
 ### Sample Script to get digest and make API calls.
 
+#### The plain old fetch API call
 ```
 
 function _getBaseUrl() {
@@ -337,6 +338,120 @@ export function postQuery(config: any) {
 }
 
 ```
+
+#### The sharepoint way using SPHttpClient
+
+Refer to these links for more details:
+
+- https://github.com/pnp/sp-dev-fx-webparts/blob/main/samples/sharepoint-crud/src/webparts/reactCrud/ReactCrudWebPart.ts
+- https://www.vrdmn.com/2017/01/working-with-rest-api-in-sharepoint.html
+
+
+##### Install the package `@microsoft/sp-http`
+
+```
+npm i --save @microsoft/sp-http
+```
+
+Then import it
+
+```
+import {
+  ODataVersion,
+  SPHttpClient,
+  SPHttpClientConfiguration,
+} from '@microsoft/sp-http';
+```
+
+##### Pass in the `absoluteUrl` and `spHttpClient` into your subcomponent
+
+###### The interace for props
+```
+export interface AwesomeWebpartProps {
+  siteUrl: string;
+  spHttpClient: SPHttpClient;
+}
+```
+
+###### The base webpart
+```
+export default class AwesomeWebpart extends BaseClientSideWebPart<AwesomeWebpartProps> {
+  public render(): void {
+    const element = React.createElement(AwesomeComponent, {
+      ...{
+        siteUrl: this.context.pageContext.web.absoluteUrl,
+        spHttpClient: this.context.spHttpClient,
+      },
+      ...this.properties,
+    });
+
+    ReactDom.render(element, this.domElement);
+  }
+  ...
+}
+```
+
+##### The actual component
+
+```
+interface AwesomeComponentStates{
+  // add your states
+}
+
+interface PostQueryResponse{
+  // add your response type here
+}
+
+// rest client config
+// Since the SP Search REST API works with ODataVersion 3, we have to create a new ISPHttpClientConfiguration object with defaultODataVersion = ODataVersion.v3
+// Override the default ODataVersion.v4 flag with the ODataVersion.v3\
+//
+// refer to this link for more note: https://www.vrdmn.com/2017/01/working-with-rest-api-in-sharepoint.html
+const clientConfigODataV3: SPHttpClientConfiguration = SPHttpClient.configurations.v1.overrideWith(
+  {
+    defaultODataVersion: ODataVersion.v3,
+  },
+);
+
+export default class AwesomeComponent extends React.Component<
+  AwesomeComponentProps,
+  AwesomeComponentStates
+> {
+  constructor(props) {
+    super(props);
+
+    // default state
+    this.state = {
+    };
+  }
+
+  componentDidMount() {
+    this.postQuery();
+  }
+  
+  private async doSearchQuery(
+    config: any,
+  ): Promise<PostQueryResponse> {
+    return this.props.spHttpClient
+      .fetch(
+        `${this.props.siteUrl}/_api/search/postquery`,
+        clientConfigODataV3,
+        {
+          headers: {
+            accept: 'application/json; odata=nometadata',
+            'content-type': 'application/json;odata=verbose;',
+          },
+          method: 'POST',
+          body: JSON.stringify(config),
+        },
+      )
+      .then((r) => r.json());
+  }
+
+}
+```
+
+
 
 ## Powerapp Form Notes
 
