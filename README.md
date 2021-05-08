@@ -297,7 +297,7 @@ function _fetch<T>(url, props, digest?: string): Promise<T> {
     ...props,
     headers: {
       accept: 'application/json; odata=nometadata',
-      'content-type': 'application/json;odata=verbose;charset=utf-8',
+      'content-type': 'application/json;odata=verbose;',
       'x-requestdigest': digest,
     },
     referrer: baseUrl,
@@ -327,8 +327,8 @@ function _getDigest() {
  * @param config
  * @returns
  */
-export function postQuery(config: any) {
-  return _fetchSecure<SharepointApiResponse.PostQueryResponse>(
+export function postQuery(config: unknown) {
+  return _fetchSecure<PostQueryResponse>(
     '/_api/search/postquery',
     {
       method: 'POST',
@@ -364,6 +364,8 @@ import {
 ```
 
 ##### Pass in the `absoluteUrl` and `spHttpClient` into your subcomponent
+
+This method is preferred because we pull these 2 items from the context instead of using regex for `absoluteUrl` or plain vanialla `fetch` in js
 
 ###### The interace for props
 ```
@@ -421,16 +423,15 @@ export default class AwesomeComponent extends React.Component<
     super(props);
 
     // default state
-    this.state = {
-    };
+    this.state = {};
   }
 
   componentDidMount() {
-    this.postQuery();
+    this.doSearchQuery();
   }
   
   private async doSearchQuery(
-    config: any,
+    config: unknown,
   ): Promise<PostQueryResponse> {
     return this.props.spHttpClient
       .fetch(
@@ -447,7 +448,6 @@ export default class AwesomeComponent extends React.Component<
       )
       .then((r) => r.json());
   }
-
 }
 ```
 
