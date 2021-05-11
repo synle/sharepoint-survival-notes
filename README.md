@@ -584,3 +584,59 @@ https://sharepointgypsy.wordpress.com/2019/04/22/sharepoint-2016-finding-crawled
 - `CTID` : Content Type ID Field
 - `RAVG` : SPS Average Rating
 - `RCNT` : SPS Rating Count
+
+
+### How to parse RefinableString of type People
+
+Sample string
+```
+jdoe@sharepoint-test.com | John Doe | 693X30232X667X6X656X626572736869707X677473756X616861406X696X6X6564696X2X62697X i:0#.f|membership|jdoe@sharepoint-test.com;bswagger@sharepoint-test.com | Bob Swagger | 693X30232X667X6X656X626572736869707X6X656X6565406X696X6X6564696X2X62697X i:0#.f|membership|bswagger@sharepoint-test.com
+```
+
+Sample method used to extract the people
+```
+export function getParsedPeopleField(personListString: string): PeopleEmail[] {
+  try {
+    return personListString
+      .split(';')
+      .map((s1) => s1.split(' | ').map((s2) => s2.trim()))
+      .map(([email, fullName]) => ({
+        email,
+        fullName,
+        profileImageSrc: `/_layouts/15/userphoto.aspx?size=L&username=${email}`
+      }));
+  } catch (err) {
+    return [];
+  }
+}
+```
+
+Sample response from the above method
+```
+[
+    {
+        "email": "jdoe@sharepoint-test.com",
+        "fullName": "John Doe",
+        "profileImageSrc": "/_layouts/15/userphoto.aspx?size=L&username=jdoe@sharepoint-test.com"
+    },
+    {
+        "email": "bswagger@sharepoint-test.com",
+        "fullName": "Bob Swagger",
+        "profileImageSrc": "/_layouts/15/userphoto.aspx?size=L&username=bswagger@sharepoint-test.com"
+    }
+]
+```
+
+
+### How to construct profile image URL using the email
+
+Given an email, this can be done via this URL format
+
+```
+ "/_layouts/15/userphoto.aspx?size=L&username=bswagger@sharepoint-test.com"
+```
+
+
+### API used to get the site user by email
+
+`GET ${this.props.siteUrl}/_api/Web/SiteUsers?$filter=Email eq '${emailString}'`
