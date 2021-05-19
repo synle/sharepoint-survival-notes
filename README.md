@@ -129,6 +129,15 @@ Under Content Types, select Add from existing site content types. If Content Typ
 
 ## Flow Related
 
+### Flow actions:
+
+- `Parallel action`: can be used to handle reminders. Will likely need to be combined with `Delay` and `Delay Until`. For example, remind user to approve a task after 1 week or 1 month, etc...
+- `Scope action`: can be used to group a list of related actions / items into a single container, super useful for copy and paste or simply move actions around.
+- `Apply to Each`: used for loop, is used in place of multi select fields as a way to return multi select value
+- `Variable`: use variable as constants or a local buffer for your flow. Must be defined on the top scope with `initialize variable`. Then `set variable` can be used when you want to assign a value to it at a later time. 
+-  Copy and Paste / Clipboard: click on ellipsis and then choose copy, create new action and choose `Clipboard`, and apply the action
+
+
 ### API Request Headers
 
 This is a common API request header for the API
