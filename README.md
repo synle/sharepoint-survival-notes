@@ -218,6 +218,41 @@ https://laptrinhx.com/add-comments-to-sharepoint-list-items-using-the-rest-api-3
 }
 ```
 
+### Child Flow using HTTP Incoming Request
+Webhook can be used as a way to manage child flows
+
+1. For your child flow - use trigger to be called "When a HTTP request is received". You need a schema - you can choose generate schema from sample data. The Flow app will parse and generate the schema.
+
+Mine looks like this
+Sample data:
+```
+{
+  "asset_request_id": "54",
+  "published_page_id": "1033"
+}
+```
+
+Schema:
+```
+{
+    "type": "object",
+    "properties": {
+        "asset_request_id": {
+            "type": "string"
+        },
+        "published_page_id": {
+            "type": "string"
+        }
+    }
+}
+```
+
+2. At the end you can choose to respond the http - here I returns 200 OK
+3. After you save - the child flow will generate a webhook within azure, you will need this URL to trigger it from the parent flow.
+4. My parent flow is simple, just need to make an HTTP action with POST to the URL provided by the child flow.
+
+
+
 ### Copy a page (template) to a new page
 
 ```
