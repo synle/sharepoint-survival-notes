@@ -613,6 +613,15 @@ Filter(Choices([@'Asset Submission'].LDH_AssetStatus), Value <> "Archived")
 ```
 
 
+### Changing Render Type (Control Type) of Sharepoint Form
+- Go to the sharepoint form
+- Under `Properties` Tab, choose `Edit Fields`
+![image](https://user-images.githubusercontent.com/3792401/124297484-f79a2980-db0f-11eb-9e45-5d4487dc1fce.png)
+
+- Click on control type and modify it.
+![image](https://user-images.githubusercontent.com/3792401/124297524-041e8200-db10-11eb-9e6e-7100cc009230.png)
+
+
 
 ### Direct link to approval app
 
