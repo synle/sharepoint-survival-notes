@@ -606,6 +606,13 @@ SharepointSubmissionForm.Mode = FormMode.View;
 Notify(Concatenate("Data saved successfully: ", Text(SharepointSubmissionForm.LastSubmit.ID)), NotificationType.Success)
 ```
 
+### Filter out options in Dropdown
+#### Dropdown - Items
+```
+Filter(Choices([@'Asset Submission'].LDH_AssetStatus), Value <> "Archived")
+```
+
+
 
 ### Direct link to approval app
 
