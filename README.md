@@ -623,6 +623,13 @@ Filter(Choices([@'Asset Submission'].LDH_AssetStatus), Value <> "Archived")
 
 
 
+### Stretching the Canvas
+Go to Advanced tab and update Width and Height
+```
+Max(App.Width, App.MinScreenWidth)
+Max(App.Height, App.MinScreenHeight)
+```
+
 ### Direct link to approval app
 
 https://australia.flow.microsoft.com/manage/approvals/received
