@@ -579,6 +579,34 @@ Refresh(SharePointIntegration.Selected);
 Exit();
 ```
 
+### New Form and Show Data After Submission
+#### App
+##### App - OnStart
+```
+ResetForm(SharepointSubmissionForm);
+NewForm(SharepointSubmissionForm);
+```
+
+#### Save Button
+##### Save Button - OnSelect
+```
+SubmitForm(SharepointSubmissionForm);
+```
+
+
+#### Form
+##### Form - OnSuccess
+```
+Set(varLastSubmit, SharepointSubmissionForm.LastSubmit);
+
+ViewForm(SharepointSubmissionForm);
+SharepointSubmissionForm.Mode = FormMode.View;
+
+
+Notify(Concatenate("Data saved successfully: ", Text(SharepointSubmissionForm.LastSubmit.ID)), NotificationType.Success)
+```
+
+
 ### Direct link to approval app
 
 https://australia.flow.microsoft.com/manage/approvals/received
