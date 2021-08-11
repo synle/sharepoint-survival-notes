@@ -733,8 +733,10 @@ Initalize with type being `Object`
 ##### Set / add property
 Add a placeholder variable of type `Object`, then use the following function `addPropety(object, propName, propValue)` or `setPropety(object, propName, propValue)`
 
+#### Convert JSON Stringify String into Flow Object
+wraps it up in the stirng `JSON`, for example `JSON(body('Checkout_Parsed_Json')?['d']?['CanvasContent1'])`
 
-#### Convert JSON to string
+#### Convert JSON Object to JSON string (aka JSON.stringify)
 wraps it up in the `string(...)`
 
 ### How to construct profile image URL using the email
