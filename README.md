@@ -723,6 +723,20 @@ Sample response from the above method
 ```
 
 
+### Working with JSON
+#### Parse Json Action
+use parse json action to parse request in json
+
+#### Working with object variable
+Initalize with type being `Object`
+
+##### Set / add property
+Add a placeholder variable of type `Object`, then use the following function `addPropety(object, propName, propValue)` or `setPropety(object, propName, propValue)`
+
+
+#### Convert JSON to string
+wraps it up in the `string(...)`
+
 ### How to construct profile image URL using the email
 
 Given an email, this can be done via this URL format
